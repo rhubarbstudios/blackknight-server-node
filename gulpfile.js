@@ -13,6 +13,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var path = require('path');
 var server = require('gulp-develop-server');
+var del = require('del');
 
 var paths = {
     es6: ['es6/**/*.js'],
@@ -21,7 +22,11 @@ var paths = {
     sourceRoot: path.join(__dirname, 'es6'),
 };
 
-gulp.task('babel', function() {
+gulp.task('clean', function(done) {
+  del([paths.es5 + '/**/*'], done);
+});
+
+gulp.task('babel', ['clean'], function() {
   return gulp.src(paths.es6)
     .pipe(sourcemaps.init())
     // .pipe(plumber())
@@ -96,7 +101,7 @@ gulp.task('clear-buffer', function() {
   betterConsole.clear();
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', ['babel'], function() {
 
   // gulp.watch(paths.es6, ['babel']);
 
@@ -107,6 +112,10 @@ gulp.task('serve', function() {
       NODE_ENV: 'development',
       BLACKKNIGHTSERVER_HOST: '0.0.0.0',
       BLACKKNIGHTSERVER_PORT: 9000
+    }
+  }, function(err) {
+    if (err) {
+      console.log('error!: ', err);
     }
   });
   gulp.watch(paths.es6, ['server:restart']);
