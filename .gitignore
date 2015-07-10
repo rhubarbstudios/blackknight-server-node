@@ -36,3 +36,5 @@ coverage.html
 .*.swp
 *.bak
 .*.swo
+
+es5/

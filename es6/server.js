@@ -1,66 +1,68 @@
-'use strict';
-
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'production';
 }
 
-var Hapi = require('hapi');
-var Good = require('good');
+import Hapi from 'hapi';
+import routes from './routes/visitor';
+console.log('routes: ', routes);
+import Good from 'good';
+import GoodConsole from 'good-console';
 // var constants = require('src/config/constants.js');
 // var routes = require('src/routes/index.js');
-var routes = [];
-var host = process.env.BLACKKNIGHTSERVER_HOST;
-var port = process.env.BLACKKNIGHTSERVER_PORT;
-var server = new Hapi.Server({
-  debug: (function() {
-    if (process.env.NODE_ENV === 'staging' ||
-        process.env.NODE_ENV === 'development' ||
-        process.env.NODE_ENV === 'test') {
-      return { log: ['*'] };
-    } else {
-      return false;
-    }
-  })(),
+
+let host = process.env.BLACKKNIGHTSERVER_HOST;
+let port = process.env.BLACKKNIGHTSERVER_PORT;
+let server = new Hapi.Server({
+  // debug: (() => {
+  //   let debug = false;
+  //   if (process.env.NODE_ENV === 'staging' ||
+  //       process.env.NODE_ENV === 'development' ||
+  //       process.env.NODE_ENV === 'test') {
+  //     debug = { log: ['*'] };
+  //   }
+  //   return debug;
+  // }()),
+  // debug: {log: ['*']},
   connections: {
     routes: {
       cors: {
-        origin: ['*'],
-        additionalExposedHeaders: ['X-User-Status']
+        origin: ['*']
       }
     }
   }
 });
 server.connection({ host: host, port: port });
 
-// if (process.env.NODE_ENV === 'staging' ||
-//     process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-//   var goodplugins = [];
-//   goodplugins.push({
-//     reporter: require('good-console'),
-//     events: { log: '*', response: '*', request: '*' }
-//   });
+if (process.env.NODE_ENV === 'staging' ||
+    process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    console.log('hello?!?!');
+  let goodplugins = [];
+  goodplugins.push({
+    reporter: GoodConsole,
+    events: { log: '*', response: '*', request: '*' }
+  });
 //   goodplugins.push({
 //     reporter: require('good-file'),
 //     events: { log: 'error', response: 'error', request: 'error', ops: 'error' },
 //     config: './logs/server_log'
 //   });
-//   server.register({
-//     register: Good,
-//     options: {
-//       reporters: goodplugins
-//     }
-//   }, function(err) {
-//     if (err) {
-//       throw err;
-//     }
-//   });
-// }
+  server.register({
+    register: Good,
+    options: {
+      reporters: goodplugins
+    }
+  }, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+}
 
-var plugins = [];
-if (process.env.NODE_ENV === 'development') {
+let plugins = [];
+// if (process.env.NODE_ENV === 'development') {
   // plugins.push({register: require('lout')});
   // plugins.push({register: require('tv'), options: {'host': host, 'endpoint': '/console'}});
-}
+// }
 
 // server.register(require('hapi-auth-jwt2'), function(err) {
 //   if (err) {
@@ -123,19 +125,20 @@ if (process.env.NODE_ENV === 'development') {
 //   });
 // });
 
-server.register(plugins, function(err) {
+server.register(plugins, err => {
   if (err) {
     throw err; // something bad happened loading the plugin
   }
 
-  for (var route in routes) {
+  for (let route in routes) {
     if (routes.hasOwnProperty(route)) {
+      console.log('routes[route]: ', routes[route]);
       server.route(routes[route]);
     }
   }
 
   if (!module.parent) {
-    server.start(function() {
+    server.start(() => {
       console.log('BlackKnight Server running at: ', server.info.uri);
     });
   }

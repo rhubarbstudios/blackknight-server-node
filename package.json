@@ -10,15 +10,20 @@
   "dependencies": {
     "boom": "^2.8.0",
     "good": "^6.1.4",
+    "good-console": "^5.0.2",
     "hapi": "^8.6.1",
     "joi": "^6.4.3",
     "lodash": "^3.9.3",
     "request-promise": "^0.4.2"
   },
   "devDependencies": {
+    "babel-eslint": "^3.1.23",
+    "eslint": "^0.24.0",
     "better-console": "^0.2.4",
     "code": "^1.4.0",
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-develop-server": "^0.4.3",
     "gulp-env": "^0.2.0",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.0",
@@ -26,6 +31,7 @@
     "gulp-nodemon": "^2.0.3",
     "gulp-open": "^0.3.2",
     "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.5.2",
     "jshint-stylish": "^2.0.0",
     "lab": "^5.10.0"
   },
