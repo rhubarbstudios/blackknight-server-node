@@ -3,7 +3,7 @@ import Boom from 'boom';
 
 export default {
   getVisitors(request, reply) {
-    Visitor.find()
+    Visitor.find().sort('firstName')
       .then((visitors) => {
         reply(visitors);
       });

@@ -19,7 +19,7 @@ var paths = {
     es6: ['es6/**/*.js'],
     es5: 'es5',
     // Must be absolute or relative to source map
-    sourceRoot: path.join(__dirname, 'es6'),
+    sourceRoot: path.join(__dirname, 'es6')
 };
 
 gulp.task('clean', function(done) {
@@ -102,9 +102,6 @@ gulp.task('clear-buffer', function() {
 });
 
 gulp.task('serve', ['babel'], function() {
-
-  // gulp.watch(paths.es6, ['babel']);
-
   server.listen({
     path: paths.es5 + '/server.js',
     env: {
@@ -124,6 +121,8 @@ gulp.task('serve', ['babel'], function() {
 gulp.task('server:restart', ['babel'], function() {
   server.restart();
 });
+
+gulp.task('default', ['serve']);
 
 // gulp.task('watch', ['watch-lint-jscs-test']);
 // gulp.task('watch-lint-jscs-test', [
