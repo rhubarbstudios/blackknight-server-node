@@ -9,6 +9,14 @@ export default {
       });
   },
 
+  getVisitor(request, reply) {
+    Visitor.findById(request.params.id)
+      .then(reply)
+      .catch(() => {
+        return reply(Boom.notFound());
+      });
+  },
+
   newVisitor(request, reply) {
     let v = request.payload;
 
@@ -18,12 +26,16 @@ export default {
       delete v.dates;
     }
 
+    if (v.from > v.to) {
+      return reply(Boom.conflict('Invalid date range'));
+    }
+
     Visitor.update({ email: v.email }, v, { upsert: true })
-      .then((visitor) => {
-        reply(visitor);
+      .then(visitor => {
+        return reply(visitor);
       })
-      .catch((e) => {
-        reply(Boom.badImplementation(e));
+      .catch(e => {
+        return reply(Boom.badImplementation(e));
       });
   }
 };

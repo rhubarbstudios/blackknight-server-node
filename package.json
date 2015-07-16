@@ -44,6 +44,6 @@
   },
   "scripts": {
     "test": "gulp test",
-    "start": "gulp serve"
+    "start": "gulp build; node es5/server.js"
   }
 }

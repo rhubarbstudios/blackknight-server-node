@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {getVisitors, newVisitor} from './VisitorHandler';
+import {getVisitors, getVisitor, newVisitor} from './VisitorHandler';
 
 let basePath = '/visitors';
 
@@ -11,6 +11,18 @@ export default [
     config: {
       validate: {
 
+      }
+    }
+  },
+  {
+    method: 'GET',
+    path: basePath + '/{id}',
+    handler: getVisitor,
+    config: {
+      validate: {
+        params: {
+          id: Joi.string().alphanum().required()
+        }
       }
     }
   },

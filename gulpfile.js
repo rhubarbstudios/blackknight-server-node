@@ -124,6 +124,8 @@ gulp.task('server:restart', ['babel'], function() {
 
 gulp.task('default', ['serve']);
 
+gulp.task('build', ['babel']);
+
 // gulp.task('watch', ['watch-lint-jscs-test']);
 // gulp.task('watch-lint-jscs-test', [
 //   'set-test-env',
