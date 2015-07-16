@@ -21,7 +21,7 @@ function startDatabase() {
 
 function createServer() {
   // let host = process.env.BLACKKNIGHTSERVER_HOST || 'localhost';
-  let port = process.env.BLACKKNIGHTSERVER_PORT || 80;
+  let port = process.env.PORT || 80;
   server = new Hapi.Server({
     // debug: (() => {
     //   let debug = false;

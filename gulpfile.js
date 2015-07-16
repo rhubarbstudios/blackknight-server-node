@@ -107,8 +107,8 @@ gulp.task('serve', ['babel'], function() {
     env: {
       NODE_PATH: '.',
       NODE_ENV: 'development',
-      BLACKKNIGHTSERVER_HOST: '0.0.0.0',
-      BLACKKNIGHTSERVER_PORT: 9000,
+      HOST: '0.0.0.0',
+      PORT: 9000,
       DATABASE_URL: 'mongodb://localhost/blackknight'
     }
   }, function(err) {
