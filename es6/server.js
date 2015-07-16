@@ -12,15 +12,16 @@ let server;
 
 function startDatabase() {
   return new Promise((resolve, reject) => {
-    mongoose.connect('mongodb://localhost/blackknight');
+    let dbUrl = process.env.DATABASE_URL;
+    mongoose.connect(dbUrl);
     mongoose.connection.on('error', reject);
     mongoose.connection.once('open', resolve);
   });
 }
 
 function createServer() {
-  let host = process.env.BLACKKNIGHTSERVER_HOST;
-  let port = process.env.BLACKKNIGHTSERVER_PORT;
+  let host = process.env.BLACKKNIGHTSERVER_HOST || 'localhost';
+  let port = process.env.BLACKKNIGHTSERVER_PORT || 80;
   server = new Hapi.Server({
     // debug: (() => {
     //   let debug = false;
