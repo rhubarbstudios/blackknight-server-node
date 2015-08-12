@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use strict';
 
 var gulp = require('gulp');
@@ -18,15 +20,21 @@ var del = require('del');
 var paths = {
     es6: ['es6/**/*.js'],
     es5: 'es5',
+    lib: 'lib/**/*',
     // Must be absolute or relative to source map
     sourceRoot: path.join(__dirname, 'es6')
 };
 
 gulp.task('clean', function(done) {
-  del([paths.es5 + '/**/*'], done);
+  del([paths.es5 + '/**/**'], done);
 });
 
-gulp.task('babel', ['clean'], function() {
+gulp.task('lib', ['clean'], function() {
+  return gulp.src(paths.lib)
+    .pipe(gulp.dest(paths.es5 + '/lib'));
+});
+
+gulp.task('babel', ['lib'], function() {
   return gulp.src(paths.es6)
     .pipe(sourcemaps.init())
     // .pipe(plumber())
@@ -116,7 +124,7 @@ gulp.task('serve', ['babel'], function() {
       console.log('error!: ', err);
     }
   });
-  gulp.watch(paths.es6, ['server:restart']);
+  gulp.watch([paths.es6, paths.lib], ['server:restart']);
 });
 
 gulp.task('server:restart', ['babel'], function() {

@@ -8,21 +8,16 @@
   "description": "BlackKnight Server",
   "author": "Charles Dudley <cd@charlesdudley.com>",
   "dependencies": {
-    "bluebird": "^2.9.33",
-    "boom": "^2.8.0",
-    "good": "^6.1.4",
-    "good-console": "^5.0.2",
-    "hapi": "^8.6.1",
-    "joi": "^6.4.3",
-    "lodash": "^3.9.3",
-    "mongoose": "^4.0.6",
-    "request-promise": "^0.4.2",
-    "source-map-support": "^0.3.2",
     "babel-eslint": "^3.1.23",
     "better-console": "^0.2.4",
+    "bluebird": "^2.9.32",
+    "boom": "^2.8.0",
+    "casper": "^0.1.1",
     "code": "^1.4.0",
     "del": "^1.2.0",
     "eslint": "^0.24.0",
+    "good": "^6.1.4",
+    "good-console": "^5.0.2",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
     "gulp-develop-server": "^0.4.3",
@@ -34,15 +29,23 @@
     "gulp-open": "^0.3.2",
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.2",
+    "hapi": "^8.6.1",
+    "joi": "^6.4.3",
     "jshint-stylish": "^2.0.0",
-    "lab": "^5.10.0"
+    "lab": "^5.10.0",
+    "lodash": "^3.9.3",
+    "mongoose": "~4.0.6",
+    "node-phantom-simple": "^2.0.1",
+    "phantomjs": "^1.9.17",
+    "source-map-support": "^0.3.2",
+    "spooky": "^0.2.5"
   },
   "devDependencies": {},
   "engines": {
-    "node": "0.12"
+    "node": "^0.12.7"
   },
   "scripts": {
     "test": "gulp test",
-    "start": "gulp build; node ./es5/server.js"
+    "start": "gulp serve"
   }
 }

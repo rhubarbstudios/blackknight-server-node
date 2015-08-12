@@ -13,6 +13,7 @@ let server;
 function startDatabase() {
   return new Promise((resolve, reject) => {
     let dbUrl = process.env.DATABASE_URL;
+    console.log('dbUrl: ', dbUrl);
     mongoose.connect(dbUrl);
     mongoose.connection.on('error', reject);
     mongoose.connection.once('open', resolve);
@@ -88,9 +89,12 @@ function registerPlugins(plugins) {
 }
 
 function loadRoutes() {
+  console.log('API: ', API);
   for (let route in API) {
+    console.log('route: ', route);
     if (API.hasOwnProperty(route)) {
       server.route(API[route]);
+      console.log('API[route]: ', API[route]);
     }
   }
 

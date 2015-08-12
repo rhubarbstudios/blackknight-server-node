@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {getVisitors, getVisitor, newVisitor} from './VisitorHandler';
+import {getVisitors, getVisitor, saveVisitor} from './VisitorHandler';
 
 let basePath = '/visitors';
 
@@ -8,11 +8,11 @@ export default [
     method: 'GET',
     path: basePath,
     handler: getVisitors,
-    config: {
-      validate: {
-
-      }
-    }
+    // config: {
+    //   validate: {
+    //
+    //   }
+    // }
   },
   {
     method: 'GET',
@@ -29,7 +29,7 @@ export default [
   {
     method: 'POST',
     path: basePath,
-    handler: newVisitor,
+    handler: saveVisitor,
     config: {
       validate: {
         payload: {

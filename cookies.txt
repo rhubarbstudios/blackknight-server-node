@@ -1,0 +1,2 @@
+[General]
+cookies="@Variant(\0\0\0\x7f\0\0\0\x16QList<QNetworkCookie>\0\0\0\0\x1\0\0\0\x1\0\0\0^ASP.NET_SessionId=ridi1purxznjfx55zaz1hqza; HttpOnly; domain=easylobby.usbanktower.com; path=/)"
